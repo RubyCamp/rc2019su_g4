@@ -1,10 +1,17 @@
 require 'dxruby'
 require_relative 'piece'
+require_relative 'hole'
+require_relative 'prefecture'
 Window.width = 900
 Window.height = 600
 
 p1 = Piece.new(100, 100, Image.load('images/shijimi.png'))  # ピースを設定
-p2 = Piece.new(400, 100, Image.load('images/shijimi_black.png'))  # 穴を設定
+h1 = Hole.new(400, 100, Image.load('images/shijimi_hole.png'))  # 穴を設定
+p2 = Piece.new(100, 400, Image.load('images/matsue.png'))  # ピースを設定
+h2 = Hole.new(400, 400, Image.load('images/matsue_hole.png'))  # 穴を設定
+
+prefectures = [Prefecture.new(p1, h1),
+               Prefecture.new(p2, h2)]
 
 #マウスカーソルが画像の上にあるかどうか
 def image_mouse_over?(piece, draw_x, draw_y)
@@ -19,25 +26,33 @@ def image_mouse_drug?(piece, draw_x, draw_y)
 end
 
 #ピースが穴にはまったかどうか
-def piece_in_place?(piece1, piece2)
-  piece1.x.between?(piece2.x-5, piece2.x+5) &&
-  piece1.y.between?(piece2.y-5, piece2.y+5)
+def piece_in_place?(piece, hole)
+  piece.x.between?(hole.x-5, hole.x+5) &&
+  piece.y.between?(hole.y-5, hole.y+5)
+end
+
+def draw_loop(prefecture)
+  prefecture.hole.draw  # 穴を描画
+  prefecture.piece.draw
+  draw_x = Input.mouse_x  # マウスカーソルのx座標
+  draw_y = Input.mouse_y  # マウスカーソルのy座標
+  if image_mouse_drug?(prefecture.piece, draw_x, draw_y) then
+    # 画像サイズの中心を操作できるように調整
+    prefecture.piece.x = draw_x - prefecture.piece.half_x
+    prefecture.piece.y = draw_y - prefecture.piece.half_y
+    prefecture.piece.draw
+  end
+  if piece_in_place?(prefecture.piece, prefecture.hole) then
+    p prefecture.piece.movable
+    prefecture.piece.x = prefecture.hole.x  # ピースを穴の位置に調整
+    prefecture.piece.y = prefecture.hole.y  # ピースを穴の位置に調整
+    prefecture.piece.draw
+    prefecture.piece.movable_change  # ピースを動かないようにする
+  end
 end
 
 Window.loop do
-  p2.draw  # 穴を描画する
-  p1.draw  # ピースを描画する
-  draw_x = Input.mouse_x  # マウスカーソルのx座標
-  draw_y = Input.mouse_y  # マウスカーソルのy座標
-  if image_mouse_drug?(p1, draw_x, draw_y) then
-    p1.x = draw_x - 100  # 画像サイズが200*200なので-100
-    p1.y = draw_y - 100  # 画像サイズが200*200なので-100
-    p1.draw
-    if piece_in_place?(p1, p2) then
-      p1.x = p2.x
-      p1.y = p2.y
-      p1.draw
-      p1.movable_change
-    end
+  2.times do |i|
+    draw_loop(prefectures[i])
   end
 end
