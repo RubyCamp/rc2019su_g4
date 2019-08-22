@@ -35,23 +35,23 @@ module Puzzle
       @p16 = Piece.new(358, 398, Image.load('images/p16.png'))
       @p17 = Piece.new(310, 476, Image.load('images/p17.png'))
 
-      @h1 = Hole.new(388, 75, -1, Image.load('images/h1.png'))
-      @h2 = Hole.new(439, 125, -1, Image.load('images/h2.png'))
-      @h3 = Hole.new(303, 107, -1, Image.load('images/h3.png'))
-      @h4 = Hole.new(338, 151, -1, Image.load('images/h4.png'))
-      @h5 = Hole.new(393, 196, -1, Image.load('images/h5.png'))
-      @h6 = Hole.new(232, 189, -1, Image.load('images/h6.png'))
-      @h7 = Hole.new(318, 223, -1, Image.load('images/h7.png'))
-      @h8 = Hole.new(275, 243, -1, Image.load('images/h8.png'))
-      @h9 = Hole.new(250, 263, -1, Image.load('images/h9.png'))
-      @h10 = Hole.new(184, 262, -1, Image.load('images/h10.png'))
-      @h11 = Hole.new(231, 294, -1, Image.load('images/h11.png'))
-      @h12 = Hole.new(112, 295, -1, Image.load('images/h12.png'))
-      @h13 = Hole.new(58, 365, -1, Image.load('images/h13.png'))
-      @h14 = Hole.new(51, 422, -1, Image.load('images/h14.png'))
-      @h15 = Hole.new(78, 461, -1, Image.load('images/h15.png'))
-      @h16 = Hole.new(184, 103, -1, Image.load('images/h16.png'))
-      @h17 = Hole.new(130, 159, -1, Image.load('images/h17.png'))
+      @h1 = Hole.new(388, 75, -2, Image.load('images/h1.png'))
+      @h2 = Hole.new(439, 125, -2, Image.load('images/h2.png'))
+      @h3 = Hole.new(303, 107, -2, Image.load('images/h3.png'))
+      @h4 = Hole.new(338, 151, -2, Image.load('images/h4.png'))
+      @h5 = Hole.new(393, 196, -2, Image.load('images/h5.png'))
+      @h6 = Hole.new(232, 189, -2, Image.load('images/h6.png'))
+      @h7 = Hole.new(318, 223, -2, Image.load('images/h7.png'))
+      @h8 = Hole.new(275, 243, -2, Image.load('images/h8.png'))
+      @h9 = Hole.new(250, 263, -2, Image.load('images/h9.png'))
+      @h10 = Hole.new(184, 262, -2, Image.load('images/h10.png'))
+      @h11 = Hole.new(231, 294, -2, Image.load('images/h11.png'))
+      @h12 = Hole.new(112, 295, -2, Image.load('images/h12.png'))
+      @h13 = Hole.new(58, 365, -2, Image.load('images/h13.png'))
+      @h14 = Hole.new(51, 422, -2, Image.load('images/h14.png'))
+      @h15 = Hole.new(78, 461, -2, Image.load('images/h15.png'))
+      @h16 = Hole.new(184, 103, -2, Image.load('images/h16.png'))
+      @h17 = Hole.new(130, 159, -2, Image.load('images/h17.png'))
 
       @i1 = Information.new(0, 0, Image.load('images/shijimi.png'))
 
@@ -146,6 +146,7 @@ module Puzzle
       if piece_in_place?(prefecture.piece, prefecture.hole)
         prefecture.piece.x = prefecture.hole.x  # ピースを穴の位置に調整
         prefecture.piece.y = prefecture.hole.y  # ピースを穴の位置に調整
+        prefecture.piece.z = -1  # ピースのｚ座標を-1にする
         prefecture.piece.draw
         prefecture.piece.movable_change  # ピースを動かないようにする
       end
