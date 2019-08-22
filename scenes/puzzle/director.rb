@@ -145,7 +145,7 @@ module Puzzle
     def play
       17.times do |i|
         draw_loop(@prefectures[i])
-        if clear?
+        if clear? && Input.key_push?(K_SPACE) 
           Scene.move_to(:ending)
         end
       end
