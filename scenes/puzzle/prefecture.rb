@@ -5,6 +5,7 @@ class Prefecture
     @piece = pi
     @hole = ho
     @information = inf
+
   end
 
 end
