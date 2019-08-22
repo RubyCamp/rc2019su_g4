@@ -45,16 +45,16 @@ module Puzzle
       @i1 = Information.new(0, 0, 1, Image.load('images/i1.png'))
       @i2 = Information.new(0, 0, 1, Image.load('images/i2.png'))
       @i3 = Information.new(0, 0, 1, Image.load('images/i3.png'))
-      @i4 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
+      @i4 = Information.new(0, 0, 1, Image.load('images/i4.png'))
       @i5 = Information.new(0, 0, 1, Image.load('images/i5.png'))
       @i6 = Information.new(0, 0, 1, Image.load('images/i6.png'))
       @i7 = Information.new(0, 0, 1, Image.load('images/i7.png'))
       @i8 = Information.new(0, 0, 1, Image.load('images/i8.png'))
       @i9 = Information.new(0, 0, 1, Image.load('images/i9.png'))
-      @i10 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
+      @i10 = Information.new(0, 0, 1, Image.load('images/i10.png'))
       @i11 = Information.new(0, 0, 1, Image.load('images/i11.png'))
-      @i12 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
-      @i13 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
+      @i12 = Information.new(0, 0, 1, Image.load('images/i12.png'))
+      @i13 = Information.new(0, 0, 1, Image.load('images/i13.png'))
       @i14 = Information.new(0, 0, 1, Image.load('images/i14.png'))
       @i15 = Information.new(0, 0, 1, Image.load('images/i15.png'))
       @i16 = Information.new(0, 0, 1, Image.load('images/i16.png'))
@@ -79,6 +79,7 @@ module Puzzle
                       Prefecture.new(@p17, @h17, @i17)]
       @having = nil
       @font = Font.new(40, 'MS ゴシック', weight: true)
+      @timer = 0
     end
 
     #マウスカーソルが画像の上にあるかどうか
@@ -117,17 +118,15 @@ module Puzzle
       Window.draw_font(50, 25, "島根パズル", @font, color: [62, 157, 54])
       draw_x = Input.mouse_x  # マウスカーソルのx座標
       draw_y = Input.mouse_y  # マウスカーソルのy座標
-      if image_mouse_click?(prefecture.piece, draw_x, draw_y) == false
-        @having = nil  # 画像をクリックしていない場合はhavingをnilに戻す
+      if Input.mouse_down?(M_LBUTTON) == false
+        @having = nil  # クリックしていない場合はhavingをnilに戻す
       end
       if image_mouse_drug?(prefecture.piece, draw_x, draw_y)
         # 画像サイズの中心を操作できるように調整
         prefecture.piece.x = draw_x - prefecture.piece.half_x
         prefecture.piece.y = draw_y - prefecture.piece.half_y
         prefecture.piece.draw  # 画像を移動させる
-#        p @having
         @having = prefecture.piece  #havingを更新
-#        p @having
       end
       if piece_in_place?(prefecture.piece, prefecture.hole)
         prefecture.piece.x = prefecture.hole.x  # ピースを穴の位置に調整
@@ -145,11 +144,10 @@ module Puzzle
     def play
       17.times do |i|
         draw_loop(@prefectures[i])
-        if clear? && Input.key_push?(K_SPACE) 
+        if clear? && Input.key_push?(K_SPACE)
           Scene.move_to(:ending)
         end
       end
     end
-
   end
 end
