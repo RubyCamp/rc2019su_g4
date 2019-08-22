@@ -6,17 +6,6 @@ require_relative 'prefecture'
 module Puzzle
   class Director
     def initialize
-
-=begin
-      @p1 = Piece.new(100, 100, Image.load('images/shijimi.png'))  # ピースを設定
-      @h1 = Hole.new(400, 100, Image.load('images/shijimi_hole.png'))  # 穴を設定
-      @p2 = Piece.new(100, 400, Image.load('images/matsue.png'))  # ピースを設定
-      @h2 = Hole.new(400, 400, Image.load('images/matsue_hole.png'))  # 穴を設定
-
-      @prefectures = [Prefecture.new(@p1, @h1),
-                      Prefecture.new(@p2, @h2)]
-=end
-
       @p1 = Piece.new(647, 75, Image.load('images/p1.png'))
       @p2 = Piece.new(694, 164, Image.load('images/p2.png'))
       @p3 = Piece.new(423, 402, Image.load('images/p3.png'))
@@ -71,7 +60,6 @@ module Puzzle
       @i16 = Information.new(0, 0, 1, Image.load('images/i16.png'))
       @i17 = Information.new(0, 0, 1, Image.load('images/i17.png'))
 
-
       @prefectures = [Prefecture.new(@p1, @h1, @i1),
                       Prefecture.new(@p2, @h2, @i2),
                       Prefecture.new(@p3, @h3, @i3),
@@ -89,25 +77,6 @@ module Puzzle
                       Prefecture.new(@p15, @h15, @i15),
                       Prefecture.new(@p16, @h16, @i16),
                       Prefecture.new(@p17, @h17, @i17)]
-=begin
-      @prefectures = [Prefecture.new(@p1, @h1),
-                      Prefecture.new(@p2, @h2),
-                      Prefecture.new(@p3, @h3),
-                      Prefecture.new(@p4, @h4),
-                      Prefecture.new(@p5, @h5),
-                      Prefecture.new(@p6, @h6),
-                      Prefecture.new(@p7, @h7),
-                      Prefecture.new(@p8, @h8),
-                      Prefecture.new(@p9, @h9),
-                      Prefecture.new(@p10, @h10),
-                      Prefecture.new(@p11, @h11),
-                      Prefecture.new(@p12, @h12),
-                      Prefecture.new(@p13, @h13),
-                      Prefecture.new(@p14, @h14),
-                      Prefecture.new(@p15, @h15),
-                      Prefecture.new(@p16, @h16),
-                      Prefecture.new(@p17, @h17)]
-=end
       @having = nil
     end
 
@@ -153,11 +122,10 @@ module Puzzle
         # 画像サイズの中心を操作できるように調整
         prefecture.piece.x = draw_x - prefecture.piece.half_x
         prefecture.piece.y = draw_y - prefecture.piece.half_y
-        prefecture.piece.draw
-        p @having
-        @having = prefecture.piece
-        p @having
-#        @having = prefecture.piece
+        prefecture.piece.draw  # 画像を移動させる
+#        p @having
+        @having = prefecture.piece  #havingを更新
+#        p @having
       end
       if piece_in_place?(prefecture.piece, prefecture.hole)
         prefecture.piece.x = prefecture.hole.x  # ピースを穴の位置に調整
@@ -165,9 +133,9 @@ module Puzzle
         prefecture.piece.z = -1  # ピースのｚ座標を-1にする
         prefecture.piece.draw
         prefecture.piece.movable_change  # ピースを動かないようにする
-        prefecture.information.draw
-        if Input.key_push?(K_SPACE)
-          prefecture.information.visible = false
+        prefecture.information.draw  #informationを描画
+        if Input.key_push?(K_SPACE)  # spaceキーが押されたら
+          prefecture.information.visible = false  #informationを見えなくする
         end
       end
     end
