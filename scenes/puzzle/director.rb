@@ -77,12 +77,12 @@ module Puzzle
                       Prefecture.new(@p15, @h15, @i15),
                       Prefecture.new(@p16, @h16, @i16),
                       Prefecture.new(@p17, @h17, @i17)]
-      @having = nil
+      @having = nil  # 今つかんでいるピース
       @font = Font.new(40, 'MS ゴシック', weight: true)
-      @counter = 0
+      @counter = 0  # informationの描画タイミングを管理
       @sound = Sound.new('sounds/click.wav')
       @bgm = Sound.new('sounds/solasido.wav')
-      @timer = 1
+      @timer = 1  # BGMの再生回数を管理
     end
 
     #マウスカーソルが画像の上にあるかどうか
@@ -115,13 +115,15 @@ module Puzzle
       end
     end
 
+    #ピースがはまったときのSEを一度だけ再生
+    #informationを表示するタイミングになったらinformationを表示
     def information_draw_count(prefecture)
-	if @counter <= 1
-	  @sound.play
+	     if @counter <= 1
+	        @sound.play
        elsif @counter >= 30
-          prefecture.information.draw  #informationを描画
+          prefecture.information.draw  # informationを描画
           prefecture.information.showed = true
-          @counter = 0
+          @counter = 0  # counterを初期化
         end
     end
 
@@ -146,34 +148,30 @@ module Puzzle
         prefecture.piece.y = prefecture.hole.y  # ピースを穴の位置に調整
         prefecture.piece.z = -1  # ピースのｚ座標を-1にする
         prefecture.piece.draw
-#        @counter += 1
-        if prefecture.information.showed == false
+        if prefecture.information.showed == false  # informationをまだ表示していないとき
           @counter += 1
           information_draw_count(prefecture)
-        elsif prefecture.information.showed
-          prefecture.information.draw  #informationを描画
+        elsif prefecture.information.showed  # 一度informationを表示したらその後は表示し続ける
+          prefecture.information.draw  # informationを描画
         end
         prefecture.piece.movable_change  # ピースを動かないようにする
-#        prefecture.information.draw  #informationを描画
         if Input.key_push?(K_SPACE)  # spaceキーが押されたら
-          prefecture.information.visible = false  #informationを見えなくする
+          prefecture.information.visible = false  # informationを見えなくする
         end
       end
     end
 
     def play
-
-      @bgm.loop_count=(-1)
+      @bgm.loop_count=(-1)  #BGMを無限ループさせる
       if @timer == 1
-	 @timer += 1
-	 @bgm.play
+	       @timer += 1
+	       @bgm.play
       end
-	 
       17.times do |i|
         draw_loop(@prefectures[i])
         if clear? && Input.key_push?(K_SPACE)
           Scene.move_to(:ending)
-	  @bgm.stop
+	        @bgm.stop
         end
       end
     end

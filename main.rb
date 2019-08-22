@@ -7,6 +7,7 @@ Window.caption = "RubyCamp Example"
 Window.width   = 900
 Window.height  = 600
 Window.bgcolor = [255, 255, 255, 255]
+Window.caption = "島根パズル"
 
 Scene.move_to(:title)
 

@@ -7,7 +7,7 @@
       @image_scroll_y = 0
       @timer1 = 1
       @timer2 = 36 * 60
-      @sound = Sound.new("sounds/kanpai.mid") 
+      @sound = Sound.new("sounds/kanpai.mid")
       @words = %w(
 「製作者」
 	山本愛海
@@ -19,9 +19,15 @@
 	.
 	.
 	「参考URL」
-	音人：https://on-jin.com
+  HurtRecord
+  https://www.hurtrecord.com/
+  bgm/20/tenjou-screen.html
+  .
+	音人
+  https://on-jin.com
+  .
 	しまねまちナビ
-	→https://www.shimane19.net
+	https://www.shimane19.net
 	.
 	.
 	.
