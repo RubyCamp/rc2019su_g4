@@ -7,7 +7,7 @@
       @image_scroll_y = 0
       @timer1 = 1
       @timer2 = 36 * 60
-      @sound = Sound.new("images/kanpai.mid") 
+      @sound = Sound.new("sounds/kanpai.mid") 
       @words = %w(
 「製作者」
 	山本愛海
@@ -18,10 +18,10 @@
 	.
 	.
 	.
-	「協力」
-	Ruby合宿
-	島根県
-	青少年自然の家サン・レイク
+	「参考URL」
+	音人：https://on-jin.com
+	しまねまちナビ
+	→https://www.shimane19.net
 	.
 	.
 	.
