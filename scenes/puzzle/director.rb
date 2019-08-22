@@ -42,7 +42,7 @@ module Puzzle
       @h5 = Hole.new(393, 196, -2, Image.load('images/h5.png'))
       @h6 = Hole.new(232, 189, -2, Image.load('images/h6.png'))
       @h7 = Hole.new(318, 223, -2, Image.load('images/h7.png'))
-      @h8 = Hole.new(275, 243, -2, Image.load('images/h8.png'))
+      @h8 = Hole.new(275, 241, -2, Image.load('images/h8.png'))
       @h9 = Hole.new(250, 263, -2, Image.load('images/h9.png'))
       @h10 = Hole.new(184, 262, -2, Image.load('images/h10.png'))
       @h11 = Hole.new(231, 294, -2, Image.load('images/h11.png'))
