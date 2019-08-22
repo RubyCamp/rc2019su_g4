@@ -34,13 +34,13 @@
     def play
       @image_scroll_y += 1
       image_draw_x = 0
-      image_draw_y = Window.height - @image_scroll_y	
+      image_draw_y = Window.height - @image_scroll_y
       Window.draw(image_draw_x, image_draw_y, @image)
-       
+
       @scroll_y += 1
       frame_out = []
       @timer2 -= 1
-      
+
       if @timer1 == 1
 	 @timer1 += 1
          @sound.play
@@ -51,7 +51,7 @@
         draw_y = (Window.height + i * FONT_SIZE + 600) - @scroll_y
 	color = [0,0,0]
         Window.draw_font(draw_x, draw_y, word, @font, color: color)
-	
+
 	if @timer2 <= 0
 	   exit
 	end

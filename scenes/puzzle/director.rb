@@ -79,7 +79,7 @@ module Puzzle
                       Prefecture.new(@p17, @h17, @i17)]
       @having = nil
       @font = Font.new(40, 'MS ゴシック', weight: true)
-      @timer = 0
+      @counter = 0
     end
 
     #マウスカーソルが画像の上にあるかどうか
@@ -112,6 +112,14 @@ module Puzzle
       end
     end
 
+    def information_draw_count(prefecture)
+        if @counter >= 30
+          prefecture.information.draw  #informationを描画
+          prefecture.information.showed = true
+          @counter = 0
+        end
+    end
+
     def draw_loop(prefecture)
       prefecture.hole.draw  # 穴を描画
       prefecture.piece.draw  # ピースを描画
@@ -133,8 +141,15 @@ module Puzzle
         prefecture.piece.y = prefecture.hole.y  # ピースを穴の位置に調整
         prefecture.piece.z = -1  # ピースのｚ座標を-1にする
         prefecture.piece.draw
+#        @counter += 1
+        if prefecture.information.showed == false
+          @counter += 1
+          information_draw_count(prefecture)
+        elsif prefecture.information.showed
+          prefecture.information.draw  #informationを描画
+        end
         prefecture.piece.movable_change  # ピースを動かないようにする
-        prefecture.information.draw  #informationを描画
+#        prefecture.information.draw  #informationを描画
         if Input.key_push?(K_SPACE)  # spaceキーが押されたら
           prefecture.information.visible = false  #informationを見えなくする
         end
