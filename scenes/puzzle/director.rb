@@ -80,6 +80,7 @@ module Puzzle
       @having = nil
       @font = Font.new(40, 'MS ゴシック', weight: true)
       @counter = 0
+      @sound = Sound.new('sounds/click.wav')
     end
 
     #マウスカーソルが画像の上にあるかどうか
@@ -113,7 +114,9 @@ module Puzzle
     end
 
     def information_draw_count(prefecture)
-        if @counter >= 30
+	if @counter <= 1
+	  @sound.play
+       elsif @counter >= 30
           prefecture.information.draw  #informationを描画
           prefecture.information.showed = true
           @counter = 0
