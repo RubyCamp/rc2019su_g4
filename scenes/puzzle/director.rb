@@ -55,7 +55,7 @@ module Puzzle
 
       @i1 = Information.new(0, 0, Image.load('images/shijimi.png'))
 
-=begin
+
       @prefectures = [Prefecture.new(@p1, @h1, @i1),
                       Prefecture.new(@p2, @h2, @i1),
                       Prefecture.new(@p3, @h3, @i1),
@@ -73,7 +73,7 @@ module Puzzle
                       Prefecture.new(@p15, @h15, @i1),
                       Prefecture.new(@p16, @h16, @i1),
                       Prefecture.new(@p17, @h17, @i1)]
-=end
+=begin
       @prefectures = [Prefecture.new(@p1, @h1),
                       Prefecture.new(@p2, @h2),
                       Prefecture.new(@p3, @h3),
@@ -91,7 +91,7 @@ module Puzzle
                       Prefecture.new(@p15, @h15),
                       Prefecture.new(@p16, @h16),
                       Prefecture.new(@p17, @h17)]
-
+=end
       @having = nil
     end
 
@@ -118,6 +118,7 @@ module Puzzle
       piece.y.between?(hole.y-5, hole.y+5)
     end
 
+    #全てのピースがはまったか
     def clear?()
       @prefectures.all? do |prefecture|
         prefecture.piece.movable == false

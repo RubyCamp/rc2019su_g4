@@ -5,8 +5,8 @@ class Hole < Sprite
     super(x, y, image)
 #    @movable = true
     self.z = z
-    @half_x = image.width / 2
-    @half_y = image.height / 2
+#    @half_x = image.width / 2
+#    @half_y = image.height / 2
   end
 
 =begin
