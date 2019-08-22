@@ -1,5 +1,5 @@
 class Hole < Sprite
-  attr_accessor :movable, :half_x, :half_y
+#  attr_accessor :movable, :half_x, :half_y
 
   def initialize(x, y, z, image)
     super(x, y, image)

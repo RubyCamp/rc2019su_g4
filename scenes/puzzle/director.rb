@@ -53,26 +53,42 @@ module Puzzle
       @h16 = Hole.new(184, 103, -2, Image.load('images/h16.png'))
       @h17 = Hole.new(130, 159, -2, Image.load('images/h17.png'))
 
-      @i1 = Information.new(0, 0, Image.load('images/shijimi.png'))
+      @i1 = Information.new(0, 0, 1, Image.load('images/i1.png'))
+      @i2 = Information.new(0, 0, 1, Image.load('images/i2.png'))
+      @i3 = Information.new(0, 0, 1, Image.load('images/i3.png'))
+      @i4 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
+      @i5 = Information.new(0, 0, 1, Image.load('images/i5.png'))
+      @i6 = Information.new(0, 0, 1, Image.load('images/i6.png'))
+      @i7 = Information.new(0, 0, 1, Image.load('images/i7.png'))
+      @i8 = Information.new(0, 0, 1, Image.load('images/i8.png'))
+      @i9 = Information.new(0, 0, 1, Image.load('images/i9.png'))
+      @i10 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
+      @i11 = Information.new(0, 0, 1, Image.load('images/i11.png'))
+      @i12 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
+      @i13 = Information.new(0, 0, 1, Image.load('images/shijimi.png'))
+      @i14 = Information.new(0, 0, 1, Image.load('images/i14.png'))
+      @i15 = Information.new(0, 0, 1, Image.load('images/i15.png'))
+      @i16 = Information.new(0, 0, 1, Image.load('images/i16.png'))
+      @i17 = Information.new(0, 0, 1, Image.load('images/i17.png'))
 
 
       @prefectures = [Prefecture.new(@p1, @h1, @i1),
-                      Prefecture.new(@p2, @h2, @i1),
-                      Prefecture.new(@p3, @h3, @i1),
-                      Prefecture.new(@p4, @h4, @i1),
-                      Prefecture.new(@p5, @h5, @i1),
-                      Prefecture.new(@p6, @h6, @i1),
-                      Prefecture.new(@p7, @h7, @i1),
-                      Prefecture.new(@p8, @h8, @i1),
-                      Prefecture.new(@p9, @h9, @i1),
-                      Prefecture.new(@p10, @h10, @i1),
-                      Prefecture.new(@p11, @h11, @i1),
-                      Prefecture.new(@p12, @h12, @i1),
-                      Prefecture.new(@p13, @h13, @i1),
-                      Prefecture.new(@p14, @h14, @i1),
-                      Prefecture.new(@p15, @h15, @i1),
-                      Prefecture.new(@p16, @h16, @i1),
-                      Prefecture.new(@p17, @h17, @i1)]
+                      Prefecture.new(@p2, @h2, @i2),
+                      Prefecture.new(@p3, @h3, @i3),
+                      Prefecture.new(@p4, @h4, @i4),
+                      Prefecture.new(@p5, @h5, @i5),
+                      Prefecture.new(@p6, @h6, @i6),
+                      Prefecture.new(@p7, @h7, @i7),
+                      Prefecture.new(@p8, @h8, @i8),
+                      Prefecture.new(@p9, @h9, @i9),
+                      Prefecture.new(@p10, @h10, @i10),
+                      Prefecture.new(@p11, @h11, @i11),
+                      Prefecture.new(@p12, @h12, @i12),
+                      Prefecture.new(@p13, @h13, @i13),
+                      Prefecture.new(@p14, @h14, @i14),
+                      Prefecture.new(@p15, @h15, @i15),
+                      Prefecture.new(@p16, @h16, @i16),
+                      Prefecture.new(@p17, @h17, @i17)]
 =begin
       @prefectures = [Prefecture.new(@p1, @h1),
                       Prefecture.new(@p2, @h2),
@@ -149,6 +165,10 @@ module Puzzle
         prefecture.piece.z = -1  # ピースのｚ座標を-1にする
         prefecture.piece.draw
         prefecture.piece.movable_change  # ピースを動かないようにする
+        prefecture.information.draw
+        if Input.key_push?(K_SPACE)
+          prefecture.information.visible = false
+        end
       end
     end
 
