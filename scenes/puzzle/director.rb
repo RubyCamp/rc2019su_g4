@@ -78,6 +78,7 @@ module Puzzle
                       Prefecture.new(@p16, @h16, @i16),
                       Prefecture.new(@p17, @h17, @i17)]
       @having = nil
+      @font = Font.new(40, 'MS ゴシック', weight: true)
     end
 
     #マウスカーソルが画像の上にあるかどうか
@@ -112,7 +113,8 @@ module Puzzle
 
     def draw_loop(prefecture)
       prefecture.hole.draw  # 穴を描画
-      prefecture.piece.draw
+      prefecture.piece.draw  # ピースを描画
+      Window.draw_font(50, 25, "島根パズル", @font, color: [62, 157, 54])
       draw_x = Input.mouse_x  # マウスカーソルのx座標
       draw_y = Input.mouse_y  # マウスカーソルのy座標
       if image_mouse_click?(prefecture.piece, draw_x, draw_y) == false
