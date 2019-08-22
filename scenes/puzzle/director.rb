@@ -81,6 +81,8 @@ module Puzzle
       @font = Font.new(40, 'MS ゴシック', weight: true)
       @counter = 0
       @sound = Sound.new('sounds/click.wav')
+      @bgm = Sound.new('sounds/solasido.wav')
+      @timer = 1
     end
 
     #マウスカーソルが画像の上にあるかどうか
@@ -160,10 +162,18 @@ module Puzzle
     end
 
     def play
+
+      @bgm.loop_count=(-1)
+      if @timer == 1
+	 @timer += 1
+	 @bgm.play
+      end
+	 
       17.times do |i|
         draw_loop(@prefectures[i])
         if clear? && Input.key_push?(K_SPACE)
           Scene.move_to(:ending)
+	  @bgm.stop
         end
       end
     end
